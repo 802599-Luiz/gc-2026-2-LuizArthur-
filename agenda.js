@@ -76,6 +76,17 @@ formulario.addEventListener("submit", (evento) => {
     hora: document.getElementById("hora").value,
   };
 
+  const hoje = new Date();
+  const ano = hoje.getFullYear();
+  const mes = String(hoje.getMonth() + 1).padStart(2, '0');
+  const dia = String(hoje.getDate()).padStart(2, '0');
+  const dataAtual = `${ano}-${mes}-${dia}`;
+
+  if (nova.data < dataAtual) {
+    mensagem.textContent = "A data escolhida é inválida, pois já passou.";
+    return;
+  }
+
   const consultas = carregar();
 
   if (horarioOcupado(consultas, nova)) {
